@@ -1,7 +1,4 @@
 // Name: Dumitrica Flavia
-// ID: 10353526
-// Date: 08/12/2020
-// A2
 
 //pre-processor directives:
 #include <iostream>
@@ -22,7 +19,7 @@ using namespace std;
 std::mt19937 gen(time(0));
 std::uniform_int_distribution<> dis(1, 1000);
 
-//Global constants:
+//Global constants
 int const MAX_NUM_OF_THREADS = 20;
 int const NUM_OF_LINKS = 2;
 int const NUM_OF_SAMPLES = 50;
@@ -31,7 +28,7 @@ string const p_s= "pressure sensor";
 string const c_s= "capacitive sensor";
 
 
-// Global variables:
+// Global variables
 int counter_ts=0;
 int counter_ps=0;
 int counter_cs=0;
@@ -39,7 +36,7 @@ int counter_cs=0;
 // Map for thread Ids
 std::map<std::thread::id, int> threadIDs;
 
-//Function which atomizes the printing action:
+// Function which atomizes the printing action:
  void printing (std::string str){
      std::mutex m; //mutex
      std::lock_guard<std::mutex> lg(m);
@@ -47,10 +44,10 @@ std::map<std::thread::id, int> threadIDs;
  }
 
 
-//Utility class to store sensor data
+// Utility class to store sensor data
 class SensorData{
  public:
- //Constructor
+
  SensorData(string type) : sensor_type(type) {}
 
  string getSensorType() {
@@ -65,11 +62,11 @@ class SensorData{
  private:
  string sensor_type="";
  std::vector<double> sensor_data;
-}; //end class SensorData
+};
 
 class Receiver{
 public:
- //Constructor
+
  Receiver () { }
 
  //Receives a SensorData object:
@@ -109,11 +106,11 @@ public:
  std::vector<double> temp_data; //vector stores temperature data received from thread
  std::vector<double> press_data; //vector stores pressure data received from thread
  std::vector<double> cap_data; //vector stores capacitance data received from thread
-}; //end class Receiver
+};
 
 class Link{
  public:
- //Constructor
+
  Link (Receiver& r, int linkNum) : inUse(false), myReceiver(r), linkId(linkNum){}
 
  //check if the link is currently in use
@@ -140,7 +137,7 @@ class Link{
  bool inUse;
  Receiver& myReceiver; //Receiver reference
  int linkId;
-}; //end class Link
+};
 
 class LinkAccessController {
 public:
@@ -174,7 +171,7 @@ public:
 
  }
 
- //Release a comm. link:
+ //Release a communication link
  void releaseLink(Link& releasedLink) {
  std::unique_lock<std::mutex> LAC_ul(LAC_mu);
  releasedLink.setIdle();
@@ -188,27 +185,27 @@ private:
  std::mutex LAC_mu; //mutex
  std::condition_variable LAC_cv;
 
-}; //end class LinkAccessController
+};
 
 //Abstract base class that models a sensor
 class Sensor {
  public:
- //Constructor
+
  Sensor(string& type) : sensorType(type) {}
 
- //Declare a pure virtual method to be overridden by derived classes:
+ //Declare a pure virtual method to be overridden by derived classes
  virtual double getValue() = 0;
 
- //Declare non-virtual method:
+ //Declare non-virtual method
  string getType() {
-    //Returns the type of Sensor that this is:
+    //Returns the type of Sensor
     return sensorType;
  }
 
- //Declare any instance variable(s):
+ //Declare any instance variable(s)
  string sensorType= "";
 
-}; //End abstract class Sensor
+};
 
 
 //Derived class for temperature sensor
@@ -220,42 +217,41 @@ class TempSensor : public Sensor {
  //Return a random value of ambient temperature between 10 and 30
  virtual double getValue() {
     return (dis(gen) % 21 + 10.0);
- } //End getValue
+ }
 
-}; //End class TempSensor
-
+};
 
 //Derived class for pressure sensor
 class PressureSensor : public Sensor {
  public:
- //Constructor
+
  PressureSensor (string& s) : Sensor(s) {}
 
 //Return a random value of pressure between 95 and 105
  virtual double getValue() {
     return (dis(gen) % 11 + 95.0);
- } //End getValue
+ } 
 
-}; //End class PressureSensor
+}; 
 
 
 //Derived class for capacitive sensor
 class CapacitiveSensor : public Sensor {
  public:
- //Constructor
+
  CapacitiveSensor (string& s) : Sensor(s) {}
 
  //Return a random value of capacitance between 1 and 5
  virtual double getValue() {
     return (dis(gen) % 5 + 1.0);
- } //End getValue
+ }
 
-}; //End class CapacitiveSensor
+};
 
 
 class BC {
 public:
-//constructor initialises a vector of Sensor pointers that are passed in by reference:
+//constructor initialises a vector of Sensor pointers that are passed in by reference
 BC(std::vector<Sensor*>& sensors): theSensors(sensors) {}
 
 
@@ -295,7 +291,7 @@ private:
  std::mutex BC_mu; //Mutex
  std::condition_variable vc; // Condition variable
 
-}; //End class BC
+};
 
 //This function is executed by each thread:
  void run(BC& theBC, int idx, LinkAccessController& lac) {
@@ -311,7 +307,7 @@ private:
     std::mutex map_mu; //declare a mutex
     std::unique_lock<std::mutex> map_locker(map_mu); //lock the map via the mutex.
     threadIDs.insert(std::make_pair(std::this_thread::get_id(), idx));
-    map_locker.unlock(); //we're done, unlock the map.
+    map_locker.unlock(); // unlock the map
 
     for (i=0; i< NUM_OF_SAMPLES; i++) {
         val=0;
@@ -353,7 +349,7 @@ private:
         // delay for random period between 1 and 10 milliseconds:
         std::this_thread::sleep_for(std::chrono::milliseconds((dis(gen) % 10) + 1));
 
-    } // end of for
+    } 
 
     Link* link = &lac.requestLink();
     std::stringstream s4;
@@ -370,53 +366,50 @@ private:
     // delay for random period between 1 and 10 milliseconds
     std::this_thread::sleep_for(std::chrono::milliseconds((dis(gen) % 10) + 1));
 
-} // end of run
+} 
 
 int main() {
- //declare a vector of Sensor pointers:
+ //declare a vector of Sensor pointers
  std::vector<Sensor*> sensors;
 
- //initialise each sensor and insert into the vector:
+ //initialise each sensor and insert into the vector
  string ts = "temperature sensor";
- sensors.push_back(new TempSensor(ts)); //push_back is a vector method.
+ sensors.push_back(new TempSensor(ts)); //push_back is a vector method
  string ps= "pressure sensor";
  sensors.push_back(new PressureSensor(ps));
  string cs= "capacitive sensor";
  sensors.push_back(new CapacitiveSensor(cs));
 
- // Instantiate the BC:
+ // Instantiate BC
  BC theBC(std::ref(sensors));
 
- // Instantiate the Receiver:
+ // Instantiate Receiver
  Receiver theReceiver;
 
- // Instantiate the Link Access Controller:
+ // Instantiate Link Access Controller
  LinkAccessController LAC(theReceiver);
 
- //instantiate and start the threads:
+ //instantiate and start threads
  std::thread t[MAX_NUM_OF_THREADS]; //array of threads
  for (int i = 0; i < MAX_NUM_OF_THREADS; i++) {
- //launch the threads:
+ // Launch threads
  t[i] = std::thread(run, std::ref(theBC), i, std::ref(LAC));
  }
 
- //wait for the threads to finish:
+ // Wait for threads to finish
  for (int i = 0; i< MAX_NUM_OF_THREADS; i++) {
  t[i].join();
  }
 
-
-
-
  cout << "All threads terminated" << endl;
 
-//print out the number of times each sensor was accessed:
+//print out the number of times each sensor was accessed
  cout<< "The temperature sensor was accessed "<< counter_ts<<" times."<< endl;
  cout<< "The pressure sensor was accessed "<< counter_ps<<" times."<< endl;
  cout<< "The capacitive sensor was accessed "<< counter_cs<<" times."<< endl;
 
- //print out all the data in the Receiver:
+ //print out all the data in the Receiver
  theReceiver.printSensorData();
 
  return 0;
-} // end of main
+}

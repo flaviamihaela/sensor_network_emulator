@@ -1,7 +1,7 @@
 // Flavia Dumitrica
-// Date: 08/12/2020
 
-// Pre-processor directives: Include necessary C++ libraries for this program
+
+// Pre-processor directives
 #include <chrono>
 #include <condition_variable>
 #include <cstdlib>
@@ -19,12 +19,12 @@
 
 using namespace std;
 
-// Initializing the pseudo-random number generator
+// Initializing pseudo-random number generator
 std::mt19937 gen(time(0));
 std::uniform_int_distribution<> dis(1, 1000); // Uniformly distributed random numbers between 1 and 1000
 
-// Global constants:
-int const MAX_NUM_OF_THREADS = 6; // Maximum number of threads allowed in the program
+// Global constants
+int const MAX_NUM_OF_THREADS = 6; // Maximum number of threads allowed in program
 int const NUM_OF_LINKS = 2; // Number of communication links
 int const NUM_OF_SAMPLES = 50; // Number of data samples
 string t_s = "temperature_sensor";
@@ -69,7 +69,7 @@ class SensorData {
  private:
   string sensor_type = "";
   std::deque<double> sensor_data; // Deque to store the sensor data
-};  // end class SensorData
+};
 
 // Class Receiver: Receives and stores sensor data for each sensor type
 class Receiver {
@@ -124,7 +124,7 @@ class Receiver {
   // Constructor (private to ensure singleton behavior)
   Receiver() {}
 
-};  // end class Receiver
+};
 
 // Class Link: Represents a communication link between sensors and the receiver
 class LinkAccessController; // Forward declaration
@@ -160,7 +160,7 @@ class Link {
   Receiver& myReceiver; // Receiver reference to store sensor data
   int linkId;
   LinkAccessController* observer; // Observer (LinkAccessController) to notify when the link becomes idle
-};  // end class Link
+}; 
 
 // Class LinkAccessController: Controls access to communication links
 class LinkAccessController {
@@ -221,7 +221,7 @@ class LinkAccessController {
     }
   }
 
-};  // end class LinkAccessController
+};
 
 void Link::attachObserver(LinkAccessController* lac) { observer = lac; } // Attach a LinkAccessController as an observer
 
@@ -252,7 +252,7 @@ class Sensor {
   // Declare any instance variable(s):
   string sensorType = "";
 
-};  // end abstract class Sensor
+};
 
 // Derived class for temperature sensor
 class TempSensor : public Sensor {
@@ -261,9 +261,9 @@ class TempSensor : public Sensor {
   TempSensor(string& s) : Sensor(s) {}
 
   // Return a random value of ambient temperature between 10 and 30
-  virtual double getValue() { return (dis(gen) % 21 + 10.0); }  // end getValue
+  virtual double getValue() { return (dis(gen) % 21 + 10.0); } 
 
-};  // end class TempSensor
+};
 
 // Derived class for pressure sensor
 class PressureSensor : public Sensor {
@@ -272,9 +272,9 @@ class PressureSensor : public Sensor {
   PressureSensor(string& s) : Sensor(s) {}
 
   // Return a random value of pressure between 95 and 105
-  virtual double getValue() { return (dis(gen) % 11 + 95.0); }  // end getValue
+  virtual double getValue() { return (dis(gen) % 11 + 95.0); }  
 
-};  // end class PressureSensor
+};  
 
 // Derived class for capacitive sensor
 class CapacitiveSensor : public Sensor {
@@ -283,9 +283,9 @@ class CapacitiveSensor : public Sensor {
   CapacitiveSensor(string& s) : Sensor(s) {}
 
   // Return a random value of capacitance between 1 and 5
-  virtual double getValue() { return (dis(gen) % 5 + 1.0); }  // end getValue
+  virtual double getValue() { return (dis(gen) % 5 + 1.0); }  
 
-};  // end class CapacitiveSensor
+}; 
 
 enum class SensorType {
   temperature_sensor,
@@ -355,7 +355,7 @@ class BC {
   std::mutex BC_mu; // Mutex to synchronize access to the bus controller
   std::condition_variable vc; // Condition variable for thread synchronization
 
-};  // end class BC
+}; 
 
 // Run function executed by each thread
 void run(BC& theBC, int idx, LinkAccessController& lac) {
@@ -417,7 +417,7 @@ void run(BC& theBC, int idx, LinkAccessController& lac) {
     // Delay for random period between 1 and 10 milliseconds:
     std::this_thread::sleep_for(std::chrono::milliseconds((dis(gen) % 10) + 1));
 
-  }  // end of for
+  }  
 
   Link* link = &lac.requestLink(); // Request a communication link
   std::stringstream s4;
@@ -441,7 +441,7 @@ void run(BC& theBC, int idx, LinkAccessController& lac) {
   // Delay for random period between 1 and 10 milliseconds
   std::this_thread::sleep_for(std::chrono::milliseconds((dis(gen) % 10) + 1));
 
-}  // end of run
+}
 
 int main() {
   // Declare a vector of Sensor pointers:
@@ -484,4 +484,4 @@ int main() {
   }
 
   return 0;
-}  // end of main
+} 
