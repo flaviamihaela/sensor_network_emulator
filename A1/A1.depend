@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1607397512 source:c:\users\flaviamihaela\desktop\a1\main.cpp
+	<iostream>
+	<thread>
+	<mutex>
+	<condition_variable>
+	<vector>
+	<ctime>
+	<random>
+	<cstdlib>
+	<string>
+	<chrono>
+	<map>
+	<sstream>
+

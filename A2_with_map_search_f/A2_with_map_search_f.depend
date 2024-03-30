@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1607420167 source:c:\users\flaviamihaela\desktop\a2_with_map_search_f\main.cpp
+	<iostream>
+	<thread>
+	<mutex>
+	<condition_variable>
+	<vector>
+	<ctime>
+	<random>
+	<cstdlib>
+	<string>
+	<chrono>
+	<map>
+	<sstream>
+
+1690057304 source:d:\cursuri manchester\year 3\concurrent\a2_with_map_search_f\main.cpp
+	<iostream>
+	<thread>
+	<mutex>
+	<condition_variable>
+	<vector>
+	<ctime>
+	<random>
+	<cstdlib>
+	<string>
+	<chrono>
+	<sstream>
+	<deque>
+	<unordered_map>
+	<memory>
+
