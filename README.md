@@ -1,4 +1,4 @@
-# sensor_network_emulator
+# Sensor Network Emulator
 
 This project implements a sensor data processing system that simulates the acquisition, processing, and transmission of sensor data from various types of sensors to a central receiver. The system utilizes multithreading, mutexes, condition variables, and design patterns to achieve concurrent and synchronized processing.
 
