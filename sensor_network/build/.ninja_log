@@ -1,0 +1,14 @@
+# ninja log v6
+44	803	7692067660000921	CMakeFiles/sensor_network.dir/src/sensor_data.cpp.obj	cdcf5572b241e560
+37	1308	7692067659940844	CMakeFiles/sensor_network.dir/src/sensor.cpp.obj	6017a8932a00f918
+3	1312	7692067659595715	CMakeFiles/sensor_network.dir/src/acquire_sensor_data.cpp.obj	f3ae44543a5929bc
+6	1334	7692067659625748	CMakeFiles/sensor_network.dir/src/bus_controller.cpp.obj	53abb306d5a3558a
+54	1371	7692067660105939	CMakeFiles/sensor_network.dir/src/utils.cpp.obj	844e7bf8451daf2f
+14	1372	7692067659700837	CMakeFiles/sensor_network.dir/src/link.cpp.obj	76b2727f176977c4
+9	1404	7692067659655734	CMakeFiles/sensor_network.dir/src/globals.cpp.obj	85dc52cc64ea3172
+17	1406	7692067659740836	CMakeFiles/sensor_network.dir/src/link_access_controller.cpp.obj	fa759172f2aacf5e
+32	1434	7692067659890858	CMakeFiles/sensor_network.dir/src/run.cpp.obj	c4cefee0990d289e
+50	1445	7692067660060876	CMakeFiles/sensor_network.dir/src/transmit_sensor_data.cpp.obj	3be2d43e7faa777a
+26	1500	7692067659830851	CMakeFiles/sensor_network.dir/src/receiver.cpp.obj	bbfa919a577f6b48
+21	1507	7692067659770834	CMakeFiles/sensor_network.dir/src/main.cpp.obj	78e831add1936e88
+1507	1674	7692067674634829	sensor_network.exe	25350456501d9ba0
