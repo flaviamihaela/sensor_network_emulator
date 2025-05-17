@@ -40,7 +40,7 @@ Valgrind (optional)
 4. Run the compiled executable.
 5. Run Valgrind with a thread-sanitizer to detect race conditions and memory leaks.
 
-# Future work 
+## Future work 
 
 1. Group related data to avoid repeated if chains
 2. RAII for marking objects (e.g. link) busy/idle
