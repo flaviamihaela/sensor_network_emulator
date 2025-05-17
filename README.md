@@ -11,6 +11,9 @@ This project implements a sensor data processing system that simulates the acqui
  - Includes error handling for thread synchronization and resource access.
  - Provides efficient handling of sensor data using deque containers.
 
+## Build 
+g++ main.cpp globals.cpp sensor.cpp sensor_data.cpp receiver.cpp bus_controller.cpp link.cpp link_access_controller.cpp utils.cpp acquire_sensor_data.cpp transmit_sensor_data.cpp run.cpp -o sensor_network.exe -pthread
+
 ## Dependencies
 C++11 compiler
 
