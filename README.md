@@ -11,6 +11,9 @@ This project implements a sensor data processing system that simulates the acqui
  - Includes error handling for thread synchronization and resource access.
  - Provides efficient handling of sensor data using deque containers.
 
+## Best Features
+- 
+
 ## Build 
 g++ main.cpp globals.cpp sensor.cpp sensor_data.cpp receiver.cpp bus_controller.cpp link.cpp link_access_controller.cpp utils.cpp acquire_sensor_data.cpp transmit_sensor_data.cpp run.cpp -o sensor_network.exe -pthread
 
@@ -22,8 +25,7 @@ C++11 compiler
 2. Navigate to the project directory.
 3. Use CMake to build the project.
 4. Run the compiled executable.
+5. Use Valgrind and thread ... to identify thread ... and memory leaks
 
-## Future Work
-Use CMake for easy build
 
    
