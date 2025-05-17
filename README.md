@@ -12,20 +12,37 @@ This project implements a sensor data processing system that simulates the acqui
  - Provides efficient handling of sensor data using deque containers.
 
 ## Best Features
-- 
+- Uses std::unordered_map to map threads to a human-readable index for log messages - O(1) search time
+- Ensures thread synchronization and efficient resource management by using mutexes and condition variables
+- Uses the Singleton, Factory and Observer design patterns to make the code more scalable and extendable
 
 ## Build 
-g++ main.cpp globals.cpp sensor.cpp sensor_data.cpp receiver.cpp bus_controller.cpp link.cpp link_access_controller.cpp utils.cpp acquire_sensor_data.cpp transmit_sensor_data.cpp run.cpp -o sensor_network.exe -pthread
+
+```bash
+cd sensor_network
+cd build
+cmake ..
+cmake --build .
+cd ..
+.\sensor_network.exe
+```
 
 ## Dependencies
 C++11 compiler
+CMake ≥ 3.10
+Thread Sanitizer (optional)
+Valgrind (optional)
 
 ## Usage
 1. Clone the repository to your local machine.
 2. Navigate to the project directory.
 3. Use CMake to build the project.
 4. Run the compiled executable.
-5. Use Valgrind and thread ... to identify thread ... and memory leaks
+5. Run Valgrind with a thread-sanitizer to detect race conditions and memory leaks.
 
+# Future work 
 
+1. Group related data to avoid repeated if chains
+2. RAII for marking objects (e.g. link) busy/idle
+3. Use std::array<std::deque<double>,3> indexed by SensorType - single lock, looped printing, less code, lock-granularity unchanged
    
