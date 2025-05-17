@@ -13,10 +13,14 @@ This project implements a sensor data processing system that simulates the acqui
 
 ## Dependencies
 C++11 compiler
-CMake (for building)
 
 ## Usage
 1. Clone the repository to your local machine.
 2. Navigate to the project directory.
 3. Use CMake to build the project.
 4. Run the compiled executable.
+
+## Future Work
+Use CMake for easy build
+
+   
