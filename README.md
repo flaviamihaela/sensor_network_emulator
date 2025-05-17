@@ -1,6 +1,6 @@
 # Sensor Network Emulator
 
-This project implements a sensor data processing system that simulates the acquisition, processing, and transmission of sensor data from various types of sensors to a central receiver. The system utilizes multithreading, mutexes, condition variables, and design patterns to achieve concurrent and synchronized processing.
+This project implements a sensor data processing system that simulates the acquisition, processing, and transmission of sensor data from various types of sensors to a central receiver. The system utilizes multithreading, mutexes, condition variables, and design patterns to achieve concurrent and synchronized processing. For more in-depth information check out my wiki for this project: [wiki](https://github.com/flaviamihaela/sensor_network_emulator/wiki)
 
 ## Key aspects:
  - Simulates multiple types of sensor objects: temperature, pressure, and capacitive sensors.
